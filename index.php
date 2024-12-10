@@ -4,22 +4,6 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
-if (file_exists(pagina2.sql)) {
-    $sql = file_get_contents(pagina2.sql);
-
-    // Ejecutar las consultas SQL
-    if ($conexion->multi_query($sql)) {
-        echo "Base de datos y tablas configuradas correctamente.";
-        do {
-            // Esto procesa múltiples resultados si los hay
-        } while ($conexion->next_result());
-    } else {
-        echo "Error ejecutando el archivo SQL: " . $conexion->error;
-    }
-} else {
-    echo "El archivo SQL no existe.";
-}
-
 // Insertar nuevo proyecto si se envía el formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['titulo']) && isset($_POST['descripcion']) && isset($_POST['imagen'])) {
     $titulo = $conexion->real_escape_string($_POST['titulo']);
